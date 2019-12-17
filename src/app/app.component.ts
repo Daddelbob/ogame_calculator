@@ -7,6 +7,7 @@ import { FusionReactor } from "./utility/fusionReactor";
 import { SolarSatellite } from "./utility/solarSatellite";
 import { Crawler } from "./utility/crawler";
 import { Officers } from "./utility/officers";
+import { ResourceDepot } from "./utility/resourceDepot";
 
 @Component({
   selector: "ogc-root",
@@ -28,6 +29,10 @@ export class AppComponent implements OnInit, OnChanges {
   public hasCommando: boolean = false;
   public plasmaTechnology: number = 10;
   public energyTechnology: number = 9;
+  public arraySize25: number[] = Array.from(
+    new Array(25),
+    (val, index) => index
+  );
 
   // Planet Variables
   public temperature: number = 32;
@@ -193,6 +198,20 @@ export class AppComponent implements OnInit, OnChanges {
       Officers.collectorEnergyProdFactor
   );
 
+  // Resource Depots Variables
+  public metalDepotLvl: number = 0;
+  public metalDepotCapacity: number = ResourceDepot.capacity(
+    this.metalDepotLvl
+  );
+  public crstalDepotLvl: number = 0;
+  public crstalDepotCapacity: number = ResourceDepot.capacity(
+    this.crstalDepotLvl
+  );
+  public deuteriumDepotLvl: number = 0;
+  public deuteriumDepotCapacity: number = ResourceDepot.capacity(
+    this.deuteriumDepotLvl
+  );
+
   constructor() {}
 
   ngOnInit() {
@@ -216,6 +235,11 @@ export class AppComponent implements OnInit, OnChanges {
       (this.crystalMineProd * this.selectedItemCrystal) / 100;
     this.itemDeuteroiumProd =
       (this.deuteriumSynthesizerProd * this.selectedItemDeuterium) / 100;
+    this.metalDepotCapacity = ResourceDepot.capacity(this.metalDepotLvl);
+    this.crstalDepotCapacity = ResourceDepot.capacity(this.crstalDepotLvl);
+    this.deuteriumDepotCapacity = ResourceDepot.capacity(
+      this.deuteriumDepotLvl
+    );
   }
 
   /**
