@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { MetalMine } from "./utility/metalMine";
 import { CrystalMine } from "./utility/crystalMine";
 import { DeuteriumSynthesizer } from "./utility/deuteriumSynthesizer";
+import { SolarPlant } from "./utility/solarPlant";
+import { FusionReactor } from "./utility/fusionReactor";
 
 @Component({
   selector: "ogc-root",
@@ -21,7 +23,8 @@ export class AppComponent {
   public hasGeologist: boolean = false;
   public geologistFactorAll: number = 10;
   public hasCommandStab: boolean = false;
-  public plasmaTechnology: number = 0;
+  public plasmaTechnology: number = 10;
+  public energyTechnology: number = 9;
 
   // Planet Variables
   public temperature: number = 32;
@@ -58,6 +61,22 @@ export class AppComponent {
   public deuteriumSynthesizerEnergyConsumtion: number = DeuteriumSynthesizer.energyConsumption(
     this.deuteriumSynthesizerLvl
   );
+
+  // Solar Plant Variables
+  public solarPlantLvl: number = 29;
+  public solarPlantPercentage: number = 100;
+  public solarPlantProd: number = SolarPlant.production(this.solarPlantLvl);
+
+  // Fusion Reactor Variables
+  public fusionReactorLvl: number = 1;
+  public fusionReactorPercentage: number = 100;
+  public fusionReactorEnergyProd: number = FusionReactor.production(
+    this.fusionReactorLvl,
+    this.energyTechnology
+  );
+  public fusionReactorDeuteriumConsumtion: number = FusionReactor.deuteriumConsumption(
+    this.fusionReactorLvl
+  ) * this.universeSpeed;
 
   constructor() {}
 

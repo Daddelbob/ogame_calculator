@@ -19,7 +19,7 @@ export class FusionReactor {
    * AUFRUNDEN(10 * STUFE * 1,1 ^ STUFE)
    * @param fusionReactorLvl
    */
-  public static deuteriumyConsumption(fusionReactorLvl: number = 0): number {
+  public static deuteriumConsumption(fusionReactorLvl: number = 0): number {
     return Math.ceil(10 * fusionReactorLvl * Math.pow(1.1, fusionReactorLvl));
   }
 

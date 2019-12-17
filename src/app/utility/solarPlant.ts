@@ -2,7 +2,6 @@ export class SolarPlant {
   /**
    * ABRUNDEN(20 * STUFE * 1,1 ^ STUFE)
    * @param solarPlantLvl
-   * @param temperature
    */
   public static production(
     solarPlantLvl: number = 0,
