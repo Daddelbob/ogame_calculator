@@ -5,6 +5,8 @@ import { DeuteriumSynthesizer } from "./utility/deuteriumSynthesizer";
 import { SolarPlant } from "./utility/solarPlant";
 import { FusionReactor } from "./utility/fusionReactor";
 import { SolarSatellite } from "./utility/solarSatellite";
+import { Crawler } from "./utility/crawler";
+import { Officers } from "./utility/officers";
 
 @Component({
   selector: "ogc-root",
@@ -18,7 +20,7 @@ export class AppComponent {
   public universeSpeed: number = 7;
   public baseIncomeMetal: number = 30;
   public baseIncomeCrystal: number = 15;
-  public isCollector: boolean = false;
+  public isCollector: boolean = true;
   public hasCommander: boolean = false;
   public hasEngineer: boolean = false;
   public hasGeologist: boolean = false;
@@ -28,7 +30,7 @@ export class AppComponent {
   public energyTechnology: number = 9;
 
   // Planet Variables
-  public temperature: number = 32;
+  public temperature: number = -93;
 
   // Metal Mine Variables
   public metalMineLvl: number = 27;
@@ -55,7 +57,7 @@ export class AppComponent {
     (this.crystalMinePercentage / 100);
 
   // Deuterium Synthesizer Variables
-  public deuteriumSynthesizerLvl: number = 24;
+  public deuteriumSynthesizerLvl: number = 19;
   public deuteriumSynthesizerPercentage: number = 100;
   public deuteriumItem: number = 0;
   public deuteriumSynthesizerProd: number =
@@ -95,7 +97,27 @@ export class AppComponent {
     this.solarSatellites *
     (this.solarSatellitesPercentage / 100);
 
-  public crawlers: number = 150;
+  // Crawler Variables
+  public crawlers: number = 80;
+  public crawlersPercentage: number = 100;
+  public crawlersMetalProd: number =
+    this.metalMineProd *
+    Crawler.metalProdFactor *
+    (this.isCollector ? 1 + Officers.collectorCrawlerProdFactor : 1) *
+    this.crawlers *
+    (this.crawlersPercentage / 100);
+  public crawlersCrystalProd: number =
+    this.crystalMineProd *
+    Crawler.crystalProdFactor *
+    this.crawlers *
+    (this.crawlersPercentage / 100);
+  public crawlersDeuteriumProd: number =
+    this.deuteriumSynthesizerProd *
+    Crawler.deuteriumProdFactor *
+    this.crawlers *
+    (this.crawlersPercentage / 100);
+  public crawlersEnergyConsumtion: number =
+    this.crawlers * Crawler.energyConsumtion * (this.crawlersPercentage / 100);
 
   constructor() {}
 
