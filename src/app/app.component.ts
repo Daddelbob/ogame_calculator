@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit, OnChanges, SimpleChanges } from "@angular/core";
 import { MetalMine } from "./utility/metalMine";
 import { CrystalMine } from "./utility/crystalMine";
 import { DeuteriumSynthesizer } from "./utility/deuteriumSynthesizer";
@@ -13,7 +13,7 @@ import { Officers } from "./utility/officers";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.sass"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnChanges {
   title = "oGameCalculator";
 
   // Global Account Variables
@@ -30,7 +30,10 @@ export class AppComponent {
   public energyTechnology: number = 9;
 
   // Planet Variables
-  public temperature: number = -93;
+  public temperature: number = 32;
+  public selectedItemMetal: number = 0;
+  public selectedItemCrystal: number = 0;
+  public selectedItemDeuterium: number = 0;
 
   // Metal Mine Variables
   public metalMineLvl: number = 27;
@@ -57,7 +60,7 @@ export class AppComponent {
     (this.crystalMinePercentage / 100);
 
   // Deuterium Synthesizer Variables
-  public deuteriumSynthesizerLvl: number = 19;
+  public deuteriumSynthesizerLvl: number = 24;
   public deuteriumSynthesizerPercentage: number = 100;
   public deuteriumItem: number = 0;
   public deuteriumSynthesizerProd: number =
@@ -101,31 +104,69 @@ export class AppComponent {
   public crawlers: number = 80;
   public crawlersPercentage: number = 100;
   public crawlersMetalProd: number =
-    this.metalMineProd *
-    Crawler.metalProdFactor *
+    Math.floor(this.metalMineProd * Crawler.metalProdFactor) *
     (this.isCollector ? 1 + Officers.collectorCrawlerProdFactor : 1) *
     this.crawlers *
     (this.crawlersPercentage / 100);
   public crawlersCrystalProd: number =
-    this.crystalMineProd *
-    Crawler.crystalProdFactor *
-    this.crawlers *
+    Math.floor(
+      this.crystalMineProd * Crawler.crystalProdFactor * this.crawlers
+    ) *
     (this.crawlersPercentage / 100);
   public crawlersDeuteriumProd: number =
-    this.deuteriumSynthesizerProd *
-    Crawler.deuteriumProdFactor *
-    this.crawlers *
+    Math.floor(
+      this.deuteriumSynthesizerProd *
+        Crawler.deuteriumProdFactor *
+        this.crawlers
+    ) *
     (this.crawlersPercentage / 100);
   public crawlersEnergyConsumtion: number =
     this.crawlers * Crawler.energyConsumtion * (this.crawlersPercentage / 100);
 
+  //Plasma Technology Variables
+  public plasmaTechnologyMetalProd: number =
+    this.metalMineProd * this.plasmaTechnology * 0.01;
+  public plasmaTechnologyCrystalProd: number =
+    this.crystalMineProd * this.plasmaTechnology * 0.0066;
+  public plasmaTechnologyDeuteriumProd: number =
+    this.deuteriumSynthesizerProd * this.plasmaTechnology * 0.0033;
+
+  // Items Variables
+  public itemMetalProd: number =
+    (this.metalMineProd * this.selectedItemMetal) / 100;
+  public itemCrystalProd: number =
+    (this.crystalMineProd * this.selectedItemCrystal) / 100;
+  public itemDeuteroiumProd: number =
+    (this.deuteriumSynthesizerProd * this.selectedItemDeuterium) / 100;
+
   constructor() {}
+
+  ngOnInit() {
+    this.calculateStats();
+    console.log('itemMetalProd', this.itemMetalProd);
+    console.log('selectedItemMetal', this.selectedItemMetal);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('CHange');
+    this.calculateStats();
+    console.log('itemMetalProd', this.itemMetalProd);
+    console.log('selectedItemMetal', this.selectedItemMetal);
+  }
 
   formatLabel(value: number) {
     if (value >= 1000000) {
       return Math.round(value / 1000000) + "M";
     }
     return value;
+  }
+
+  calculateStats() {
+    this.itemMetalProd = (this.metalMineProd * this.selectedItemMetal) / 100;
+    this.itemCrystalProd =
+      (this.crystalMineProd * this.selectedItemCrystal) / 100;
+    this.itemDeuteroiumProd =
+      (this.deuteriumSynthesizerProd * this.selectedItemDeuterium) / 100;
   }
 
   /**

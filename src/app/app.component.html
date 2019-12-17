@@ -93,11 +93,11 @@
   </tr>
   <tr>
     <td>Plasmatechnik</td>
-    <td>15</td>
+    <td>{{ plasmaTechnology }}</td>
     <td></td>
-    <td>1000</td>
-    <td>700</td>
-    <td>450</td>
+    <td>{{ plasmaTechnologyMetalProd }}</td>
+    <td>{{ plasmaTechnologyCrystalProd }}</td>
+    <td>{{ plasmaTechnologyDeuteriumProd }}</td>
     <td></td>
     <td></td>
   </tr>
@@ -106,30 +106,30 @@
     <td></td>
     <td></td>
     <td>
-      10000
-      <select
-        ><option>0%</option>
-        <option>10%</option>
-        <option>20%</option>
-        <option>30%</option></select
+      {{ itemMetalProd }}
+      <select [(ngModel)]="selectedItemMetal" (ngModelChange)="calculateStats()"
+        ><option [ngValue]="0">0%</option>
+        <option [ngValue]="10">10%</option>
+        <option [ngValue]="20">20%</option>
+        <option [ngValue]="30">30%</option></select
       >
     </td>
     <td>
-      7000
-      <select
-        ><option>0%</option>
-        <option>10%</option>
-        <option>20%</option>
-        <option>30%</option></select
+      {{ itemCrystalProd }}
+      <select [(ngModel)]="selectedItemCrystal" (ngModelChange)="calculateStats()"
+        ><option [ngValue]="0">0%</option>
+        <option [ngValue]="10">10%</option>
+        <option [ngValue]="20">20%</option>
+        <option [ngValue]="30">30%</option></select
       >
     </td>
     <td>
-      3000
-      <select
-        ><option>0%</option>
-        <option>10%</option>
-        <option>20%</option>
-        <option>30%</option></select
+      {{ itemDeuteroiumProd }}
+      <select [(ngModel)]="selectedItemDeuterium" (ngModelChange)="calculateStats()"
+        ><option [ngValue]="0">0%</option>
+        <option [ngValue]="10">10%</option>
+        <option [ngValue]="20">20%</option>
+        <option [ngValue]="30">30%</option></select
       >
     </td>
     <td></td>
@@ -267,12 +267,3 @@
     <td></td>
   </tr>
 </table>
-
-<p>{{ metalMineProd }}</p>
-<mat-slider
-  thumbLabel
-  [displayWith]="formatLabel"
-  tickInterval="1"
-  min="0"
-  max="60"
-></mat-slider>
