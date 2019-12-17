@@ -4,7 +4,7 @@ export class DeuteriumSynthesizer {
    * @param deuteriumSynthesizerLvl
    * @param temperature
    */
-  production(
+  public static production(
     deuteriumSynthesizerLvl: number = 0,
     temperature: number = 0
   ): number {
@@ -20,7 +20,7 @@ export class DeuteriumSynthesizer {
    * AUFRUNDEN(20 * STUFE * 1,1 ^ STUFE)
    * @param deuteriumSynthesizerLvl
    */
-  energyConsumption(deuteriumSynthesizerLvl: number = 0): number {
+  public static energyConsumption(deuteriumSynthesizerLvl: number = 0): number {
     return Math.ceil(
       20 * deuteriumSynthesizerLvl * Math.pow(1.1, deuteriumSynthesizerLvl)
     );
@@ -30,7 +30,7 @@ export class DeuteriumSynthesizer {
    * ABRUNDEN(150 * 1,5 ^ X)
    * @param deuteriumSynthesizerLvl
    */
-  metalCosts(deuteriumSynthesizerLvl: number = 0): number {
+  public static metalCosts(deuteriumSynthesizerLvl: number = 0): number {
     return Math.floor(150 * Math.pow(1.5, deuteriumSynthesizerLvl));
   }
 
@@ -38,7 +38,7 @@ export class DeuteriumSynthesizer {
    * ABRUNDEN(50 * 1,5 ^ X)
    * @param deuteriumSynthesizerLvl
    */
-  crystalCosts(deuteriumSynthesizerLvl: number = 0): number {
+  public static crystalCosts(deuteriumSynthesizerLvl: number = 0): number {
     return Math.floor(50 * Math.pow(1.5, deuteriumSynthesizerLvl));
   }
 }
