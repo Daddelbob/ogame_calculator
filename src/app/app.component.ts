@@ -212,13 +212,21 @@ export class AppComponent implements OnInit, OnChanges {
     this.deuteriumDepotLvl
   );
 
+  // Total Resources
+  public totalMetalProd: number = 0;
+  public totalCrystalProd: number = 0;
+  public totalDeuteriumProd: number = 0;
+  public totalEnergyProd: number = 0;
+
   constructor() {}
 
   ngOnInit() {
-    // this.calculateStats();
+    console.log("init");
+    this.calculateStats();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("change");
     // this.calculateStats();
   }
 
@@ -230,16 +238,66 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   calculateStats() {
-    this.itemMetalProd = (this.metalMineProd * this.selectedItemMetal) / 100;
-    this.itemCrystalProd =
-      (this.crystalMineProd * this.selectedItemCrystal) / 100;
-    this.itemDeuteroiumProd =
-      (this.deuteriumSynthesizerProd * this.selectedItemDeuterium) / 100;
+    // items
+    this.itemMetalProd = Math.floor(
+      (this.metalMineProd * this.selectedItemMetal) / 100
+    );
+    this.itemCrystalProd = Math.floor(
+      (this.crystalMineProd * this.selectedItemCrystal) / 100
+    );
+    this.itemDeuteroiumProd = Math.floor(
+      (this.deuteriumSynthesizerProd * this.selectedItemDeuterium) / 100
+    );
+
+    // depots
     this.metalDepotCapacity = ResourceDepot.capacity(this.metalDepotLvl);
     this.crstalDepotCapacity = ResourceDepot.capacity(this.crstalDepotLvl);
     this.deuteriumDepotCapacity = ResourceDepot.capacity(
       this.deuteriumDepotLvl
     );
+
+    // Resources
+    this.totalMetalProd = Math.floor(
+      this.metalMineProd +
+        this.crawlersMetalProd +
+        this.plasmaTechnologyMetalProd +
+        this.itemMetalProd +
+        this.geologistMetalProd +
+        this.commandoMetalProd +
+        this.collectorMetalProd
+    );
+
+    this.totalCrystalProd = Math.floor(
+      this.crystalMineProd +
+        this.crawlersCrystalProd +
+        this.plasmaTechnologyCrystalProd +
+        this.itemCrystalProd +
+        this.geologistCrystalProd +
+        this.commandoCrystalProd +
+        this.collectorCrystalProd
+    );
+
+    this.totalDeuteriumProd = Math.floor(
+      this.deuteriumSynthesizerProd +
+        this.crawlersDeuteriumProd +
+        this.plasmaTechnologyDeuteriumProd +
+        this.itemDeuteroiumProd +
+        this.geologistDeuteroiumProd +
+        this.commandoDeuteroiumProd +
+        this.collectorDeuteroiumProd
+    );
+
+    this.totalEnergyProd =
+      this.solarPlantProd +
+      this.fusionReactorEnergyProd +
+      this.solarSatellitesEnergyProd +
+      this.engineerEnergyProd +
+      this.commandoEnergyProd +
+      this.collectorEnergyProd -
+      this.metalMineEnergyConsumtion -
+      this.crystalMineEnergyConsumtion -
+      this.deuteriumSynthesizerEnergyConsumtion -
+      this.crawlersEnergyConsumtion;
   }
 
   /**
@@ -280,4 +338,32 @@ export class AppComponent implements OnInit, OnChanges {
         (metallMinePercentage / 100)
     );
   }
+
+  thousandsSeparator(amount: string, separator: string = ".") {
+    const arr = amount.split("");
+    arr.reverse();
+    const toPop = arr.length % 3;
+    let removed;
+    if (toPop > 0 && arr.length > 3) {
+      removed = arr.splice(arr.length - 1, toPop);
+    }
+    console.log(arr);
+    console.log(removed);
+    for (let i = 1; i < arr.length / 3; i++) {
+      arr.splice(i * 3 + i - 1, 0, '.');
+    }
+    arr.pop();
+    console.log(arr);
+  }
+
+//   var arr = "1".split("");
+// arr.reverse();
+// var toPop = arr.length % 3;
+// var removed;
+// if(toPop > 0 && arr.length>3) {removed = arr.slice(arr.length-toPop,arr.length);}
+// console.log(arr);
+// console.log(removed);
+// for(var i=1; i<arr.length / 3; i++) {arr.splice(i*3+i-1, 0, ".");}
+// arr.pop();
+// console.log(arr);
 }

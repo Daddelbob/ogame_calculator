@@ -218,28 +218,31 @@
   <tr>
     <td>Gesamt pro Stunde</td>
     <td></td>
-    <td>1000</td>
-    <td>700</td>
-    <td>450</td>
-    <td>300</td>
+    <td></td>
+    <td>{{ totalMetalProd }}</td>
+    <td>{{ totalCrystalProd }}</td>
+    <td>{{ totalDeuteriumProd }}</td>
+    <td>{{ totalEnergyProd }}</td>
     <td></td>
   </tr>
   <tr>
     <td>Gesamt pro Tag</td>
     <td></td>
-    <td>1000000</td>
-    <td>700000</td>
-    <td>405000</td>
-    <td>300</td>
+    <td></td>
+    <td>{{ totalMetalProd * 24 }}</td>
+    <td>{{ totalCrystalProd * 24 }}</td>
+    <td>{{ totalDeuteriumProd * 24 }}</td>
+    <td>{{ totalEnergyProd }}</td>
     <td></td>
   </tr>
   <tr>
     <td>Gesamt pro Woche</td>
     <td></td>
-    <td>100000000</td>
-    <td>70000000</td>
-    <td>40000050</td>
-    <td>300</td>
+    <td></td>
+    <td>{{ totalMetalProd * 24 * 7 }}</td>
+    <td>{{ totalCrystalProd * 24 * 7 }}</td>
+    <td>{{ totalDeuteriumProd * 24 * 7 }}</td>
+    <td>{{ totalEnergyProd }}</td>
     <td></td>
   </tr>
 </table>
