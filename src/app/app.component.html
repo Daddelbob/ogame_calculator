@@ -73,13 +73,13 @@
   </tr>
   <tr>
     <td>Solarsatellit</td>
-    <td>500</td>
+    <td>{{ solarSatellites }}</td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
-    <td>15000</td>
-    <td>100</td>
+    <td>{{ solarSatellitesEnergyProd }}</td>
+    <td>{{ solarSatellitesPercentage }}</td>
   </tr>
   <tr>
     <td>Crawler</td>
@@ -268,7 +268,7 @@
   </tr>
 </table>
 
-<p>{{ metallMineProd }}</p>
+<p>{{ metalMineProd }}</p>
 <mat-slider
   thumbLabel
   [displayWith]="formatLabel"

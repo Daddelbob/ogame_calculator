@@ -4,6 +4,7 @@ import { CrystalMine } from "./utility/crystalMine";
 import { DeuteriumSynthesizer } from "./utility/deuteriumSynthesizer";
 import { SolarPlant } from "./utility/solarPlant";
 import { FusionReactor } from "./utility/fusionReactor";
+import { SolarSatellite } from "./utility/solarSatellite";
 
 @Component({
   selector: "ogc-root",
@@ -34,20 +35,24 @@ export class AppComponent {
   public metalMinePercentage: number = 100;
   public metalItem: number = 0;
   public metalMineProd: number =
-    MetalMine.production(this.metalMineLvl) * this.universeSpeed;
-  public metalMineEnergyConsumtion: number = MetalMine.energyConsumption(
-    this.metalMineLvl
-  );
+    MetalMine.production(this.metalMineLvl) *
+    (this.metalMinePercentage / 100) *
+    this.universeSpeed;
+  public metalMineEnergyConsumtion: number =
+    MetalMine.energyConsumption(this.metalMineLvl) *
+    (this.metalMinePercentage / 100);
 
   // Crystal Mine Variables
   public crystalMineLvl: number = 27;
   public crystalMinePercentage: number = 100;
   public crystalItem: number = 0;
   public crystalMineProd: number =
-    CrystalMine.production(this.crystalMineLvl) * this.universeSpeed;
-  public crystalMineEnergyConsumtion: number = CrystalMine.energyConsumption(
-    this.crystalMineLvl
-  );
+    CrystalMine.production(this.crystalMineLvl) *
+    (this.crystalMinePercentage / 100) *
+    this.universeSpeed;
+  public crystalMineEnergyConsumtion: number =
+    CrystalMine.energyConsumption(this.crystalMineLvl) *
+    (this.crystalMinePercentage / 100);
 
   // Deuterium Synthesizer Variables
   public deuteriumSynthesizerLvl: number = 24;
@@ -57,26 +62,40 @@ export class AppComponent {
     DeuteriumSynthesizer.production(
       this.deuteriumSynthesizerLvl,
       this.temperature
-    ) * this.universeSpeed;
-  public deuteriumSynthesizerEnergyConsumtion: number = DeuteriumSynthesizer.energyConsumption(
-    this.deuteriumSynthesizerLvl
-  );
+    ) *
+    (this.deuteriumSynthesizerPercentage / 100) *
+    this.universeSpeed;
+  public deuteriumSynthesizerEnergyConsumtion: number =
+    DeuteriumSynthesizer.energyConsumption(this.deuteriumSynthesizerLvl) *
+    (this.deuteriumSynthesizerPercentage / 100);
 
   // Solar Plant Variables
   public solarPlantLvl: number = 29;
   public solarPlantPercentage: number = 100;
-  public solarPlantProd: number = SolarPlant.production(this.solarPlantLvl);
+  public solarPlantProd: number =
+    SolarPlant.production(this.solarPlantLvl) *
+    (this.solarPlantPercentage / 100);
 
   // Fusion Reactor Variables
   public fusionReactorLvl: number = 1;
   public fusionReactorPercentage: number = 100;
-  public fusionReactorEnergyProd: number = FusionReactor.production(
-    this.fusionReactorLvl,
-    this.energyTechnology
-  );
-  public fusionReactorDeuteriumConsumtion: number = FusionReactor.deuteriumConsumption(
-    this.fusionReactorLvl
-  ) * this.universeSpeed;
+  public fusionReactorEnergyProd: number =
+    FusionReactor.production(this.fusionReactorLvl, this.energyTechnology) *
+    (this.fusionReactorPercentage / 100);
+  public fusionReactorDeuteriumConsumtion: number =
+    FusionReactor.deuteriumConsumption(this.fusionReactorLvl) *
+    (this.fusionReactorPercentage / 100) *
+    this.universeSpeed;
+
+  // Solar Satellites Variables
+  public solarSatellites: number = 221;
+  public solarSatellitesPercentage: number = 100;
+  public solarSatellitesEnergyProd: number =
+    SolarSatellite.production(this.temperature) *
+    this.solarSatellites *
+    (this.solarSatellitesPercentage / 100);
+
+  public crawlers: number = 150;
 
   constructor() {}
 
