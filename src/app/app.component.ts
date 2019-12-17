@@ -26,7 +26,6 @@ export class AppComponent implements OnInit, OnChanges {
   public hasEngineer: boolean = false;
   public engineerFactorEnergy: number = 10;
   public hasCommando: boolean = false;
-  public commandoFactorEnergyAndMines: number = 2;
   public plasmaTechnology: number = 10;
   public energyTechnology: number = 9;
 
@@ -125,44 +124,74 @@ export class AppComponent implements OnInit, OnChanges {
     this.crawlers * Crawler.energyConsumtion * (this.crawlersPercentage / 100);
 
   //Plasma Technology Variables
-  public plasmaTechnologyMetalProd: number =
-    this.metalMineProd * this.plasmaTechnology * 0.01;
-  public plasmaTechnologyCrystalProd: number =
-    this.crystalMineProd * this.plasmaTechnology * 0.0066;
-  public plasmaTechnologyDeuteriumProd: number =
-    this.deuteriumSynthesizerProd * this.plasmaTechnology * 0.0033;
+  public plasmaTechnologyMetalProd: number = Math.floor(
+    this.metalMineProd * this.plasmaTechnology * 0.01
+  );
+  public plasmaTechnologyCrystalProd: number = Math.floor(
+    this.crystalMineProd * this.plasmaTechnology * 0.0066
+  );
+  public plasmaTechnologyDeuteriumProd: number = Math.floor(
+    this.deuteriumSynthesizerProd * this.plasmaTechnology * 0.0033
+  );
 
   // Items Variables
-  public itemMetalProd: number =
-    (this.metalMineProd * this.selectedItemMetal) / 100;
-  public itemCrystalProd: number =
-    (this.crystalMineProd * this.selectedItemCrystal) / 100;
-  public itemDeuteroiumProd: number =
-    (this.deuteriumSynthesizerProd * this.selectedItemDeuterium) / 100;
+  public itemMetalProd: number = Math.floor(
+    (this.metalMineProd * this.selectedItemMetal) / 100
+  );
+  public itemCrystalProd: number = Math.floor(
+    (this.crystalMineProd * this.selectedItemCrystal) / 100
+  );
+  public itemDeuteroiumProd: number = Math.floor(
+    (this.deuteriumSynthesizerProd * this.selectedItemDeuterium) / 100
+  );
 
   // Officer and Player-Class Variables
-  public geologistMetalProd: number =
-    (this.metalMineProd * this.geologistFactorAll) / 100;
-  public geologistCrystalProd: number =
-    (this.crystalMineProd * this.geologistFactorAll) / 100;
-  public geologistDeuteroiumProd: number =
-    (this.deuteriumSynthesizerProd * this.geologistFactorAll) / 100;
+  public geologistMetalProd: number = Math.floor(
+    (this.metalMineProd * this.geologistFactorAll) / 100
+  );
+  public geologistCrystalProd: number = Math.floor(
+    (this.crystalMineProd * this.geologistFactorAll) / 100
+  );
+  public geologistDeuteroiumProd: number = Math.floor(
+    (this.deuteriumSynthesizerProd * this.geologistFactorAll) / 100
+  );
 
-  public engineerEnergyProd: number =
+  public engineerEnergyProd: number = Math.floor(
     ((this.solarPlantProd +
       this.solarSatellitesEnergyProd +
       this.fusionReactorEnergyProd) *
       this.engineerFactorEnergy) /
-    100;
+      100
+  );
 
-  public commandoMetalProd: number =
-    (this.metalMineProd * this.commandoFactorEnergyAndMines) / 100;
-  public commandoCrystalProd: number =
-    (this.crystalMineProd * this.commandoFactorEnergyAndMines) / 100;
-  public commandoDeuteroiumProd: number =
-    (this.deuteriumSynthesizerProd * this.commandoFactorEnergyAndMines) / 100;
-  public commandoEnergyProd: number =
-    (this.deuteriumSynthesizerProd * this.commandoFactorEnergyAndMines) / 100;
+  public commandoMetalProd: number = Math.floor(
+    this.metalMineProd * Officers.commandoMinesAndEnergyProdFactor
+  );
+  public commandoCrystalProd: number = Math.floor(
+    this.crystalMineProd * Officers.commandoMinesAndEnergyProdFactor
+  );
+  public commandoDeuteroiumProd: number = Math.floor(
+    this.deuteriumSynthesizerProd * Officers.commandoMinesAndEnergyProdFactor
+  );
+  public commandoEnergyProd: number = Math.floor(
+    this.deuteriumSynthesizerProd * Officers.commandoMinesAndEnergyProdFactor
+  );
+
+  public collectorMetalProd: number = Math.floor(
+    this.metalMineProd * Officers.collectorMinesProdFactor
+  );
+  public collectorCrystalProd: number = Math.floor(
+    this.crystalMineProd * Officers.collectorMinesProdFactor
+  );
+  public collectorDeuteroiumProd: number = Math.floor(
+    this.deuteriumSynthesizerProd * Officers.collectorMinesProdFactor
+  );
+  public collectorEnergyProd: number = Math.floor(
+    (this.solarPlantProd +
+      this.solarSatellitesEnergyProd +
+      this.fusionReactorEnergyProd) *
+      Officers.collectorEnergyProdFactor
+  );
 
   constructor() {}
 

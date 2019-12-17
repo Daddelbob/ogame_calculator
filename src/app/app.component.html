@@ -175,10 +175,10 @@
     <td>Kollektor</td>
     <td><mat-slide-toggle [(ngModel)]="isCollector"></mat-slide-toggle></td>
     <td></td>
-    <td>1000</td>
-    <td>700</td>
-    <td>450</td>
-    <td>300</td>
+    <td>{{ isCollector ? collectorMetalProd : "" }}</td>
+    <td>{{ isCollector ? collectorCrystalProd : "" }}</td>
+    <td>{{ isCollector ? collectorDeuteroiumProd : "" }}</td>
+    <td>{{ isCollector ? collectorEnergyProd : "" }}</td>
     <td></td>
   </tr>
   <tr>
@@ -244,7 +244,6 @@
   </tr>
   <tr>
     <td>Gesamt pro Stunde</td>
-    <td><mat-slide-toggle></mat-slide-toggle></td>
     <td></td>
     <td>1000</td>
     <td>700</td>
@@ -254,7 +253,6 @@
   </tr>
   <tr>
     <td>Gesamt pro Tag</td>
-    <td><mat-slide-toggle></mat-slide-toggle></td>
     <td></td>
     <td>1000000</td>
     <td>700000</td>
@@ -264,7 +262,6 @@
   </tr>
   <tr>
     <td>Gesamt pro Woche</td>
-    <td><mat-slide-toggle></mat-slide-toggle></td>
     <td></td>
     <td>100000000</td>
     <td>70000000</td>
