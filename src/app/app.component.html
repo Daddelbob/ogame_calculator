@@ -116,7 +116,9 @@
     </td>
     <td>
       {{ itemCrystalProd }}
-      <select [(ngModel)]="selectedItemCrystal" (ngModelChange)="calculateStats()"
+      <select
+        [(ngModel)]="selectedItemCrystal"
+        (ngModelChange)="calculateStats()"
         ><option [ngValue]="0">0%</option>
         <option [ngValue]="10">10%</option>
         <option [ngValue]="20">20%</option>
@@ -125,7 +127,9 @@
     </td>
     <td>
       {{ itemDeuteroiumProd }}
-      <select [(ngModel)]="selectedItemDeuterium" (ngModelChange)="calculateStats()"
+      <select
+        [(ngModel)]="selectedItemDeuterium"
+        (ngModelChange)="calculateStats()"
         ><option [ngValue]="0">0%</option>
         <option [ngValue]="10">10%</option>
         <option [ngValue]="20">20%</option>
@@ -137,37 +141,39 @@
   </tr>
   <tr>
     <td>Geologe</td>
-    <td><mat-slide-toggle></mat-slide-toggle></td>
+    <td>
+      <mat-slide-toggle [(ngModel)]="hasGeologist"></mat-slide-toggle>
+    </td>
     <td></td>
-    <td>1000</td>
-    <td>700</td>
-    <td>450</td>
+    <td>{{ hasGeologist ? geologistMetalProd : "" }}</td>
+    <td>{{ hasGeologist ? geologistCrystalProd : "" }}</td>
+    <td>{{ hasGeologist ? geologistDeuteroiumProd : "" }}</td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td>Ingenieur</td>
-    <td><mat-slide-toggle></mat-slide-toggle></td>
+    <td><mat-slide-toggle [(ngModel)]="hasEngineer"></mat-slide-toggle></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
-    <td>10000</td>
+    <td>{{ hasEngineer ? engineerEnergyProd : "" }}</td>
     <td></td>
   </tr>
   <tr>
     <td>Kommandostab</td>
-    <td><mat-slide-toggle></mat-slide-toggle></td>
+    <td><mat-slide-toggle [(ngModel)]="hasCommando"></mat-slide-toggle></td>
     <td></td>
-    <td>1000</td>
-    <td>700</td>
-    <td>450</td>
-    <td>500</td>
+    <td>{{ hasCommando ? commandoMetalProd : "" }}</td>
+    <td>{{ hasCommando ? commandoCrystalProd : "" }}</td>
+    <td>{{ hasCommando ? commandoDeuteroiumProd : "" }}</td>
+    <td>{{ hasCommando ? commandoEnergyProd : "" }}</td>
     <td></td>
   </tr>
   <tr>
     <td>Kollektor</td>
-    <td><mat-slide-toggle></mat-slide-toggle></td>
+    <td><mat-slide-toggle [(ngModel)]="isCollector"></mat-slide-toggle></td>
     <td></td>
     <td>1000</td>
     <td>700</td>

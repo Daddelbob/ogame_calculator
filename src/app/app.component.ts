@@ -21,11 +21,12 @@ export class AppComponent implements OnInit, OnChanges {
   public baseIncomeMetal: number = 30;
   public baseIncomeCrystal: number = 15;
   public isCollector: boolean = true;
-  public hasCommander: boolean = false;
-  public hasEngineer: boolean = false;
   public hasGeologist: boolean = false;
   public geologistFactorAll: number = 10;
-  public hasCommandStab: boolean = false;
+  public hasEngineer: boolean = false;
+  public engineerFactorEnergy: number = 10;
+  public hasCommando: boolean = false;
+  public commandoFactorEnergyAndMines: number = 2;
   public plasmaTechnology: number = 10;
   public energyTechnology: number = 9;
 
@@ -93,7 +94,7 @@ export class AppComponent implements OnInit, OnChanges {
     this.universeSpeed;
 
   // Solar Satellites Variables
-  public solarSatellites: number = 221;
+  public solarSatellites: number = 180;
   public solarSatellitesPercentage: number = 100;
   public solarSatellitesEnergyProd: number =
     SolarSatellite.production(this.temperature) *
@@ -139,19 +140,38 @@ export class AppComponent implements OnInit, OnChanges {
   public itemDeuteroiumProd: number =
     (this.deuteriumSynthesizerProd * this.selectedItemDeuterium) / 100;
 
+  // Officer and Player-Class Variables
+  public geologistMetalProd: number =
+    (this.metalMineProd * this.geologistFactorAll) / 100;
+  public geologistCrystalProd: number =
+    (this.crystalMineProd * this.geologistFactorAll) / 100;
+  public geologistDeuteroiumProd: number =
+    (this.deuteriumSynthesizerProd * this.geologistFactorAll) / 100;
+
+  public engineerEnergyProd: number =
+    ((this.solarPlantProd +
+      this.solarSatellitesEnergyProd +
+      this.fusionReactorEnergyProd) *
+      this.engineerFactorEnergy) /
+    100;
+
+  public commandoMetalProd: number =
+    (this.metalMineProd * this.commandoFactorEnergyAndMines) / 100;
+  public commandoCrystalProd: number =
+    (this.crystalMineProd * this.commandoFactorEnergyAndMines) / 100;
+  public commandoDeuteroiumProd: number =
+    (this.deuteriumSynthesizerProd * this.commandoFactorEnergyAndMines) / 100;
+  public commandoEnergyProd: number =
+    (this.deuteriumSynthesizerProd * this.commandoFactorEnergyAndMines) / 100;
+
   constructor() {}
 
   ngOnInit() {
-    this.calculateStats();
-    console.log('itemMetalProd', this.itemMetalProd);
-    console.log('selectedItemMetal', this.selectedItemMetal);
+    // this.calculateStats();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('CHange');
-    this.calculateStats();
-    console.log('itemMetalProd', this.itemMetalProd);
-    console.log('selectedItemMetal', this.selectedItemMetal);
+    // this.calculateStats();
   }
 
   formatLabel(value: number) {
