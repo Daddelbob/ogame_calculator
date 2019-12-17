@@ -1,4 +1,7 @@
 import { Component } from "@angular/core";
+import { MetalMine } from "./utility/metalMine";
+import { CrystalMine } from "./utility/crystalMine";
+import { DeuteriumSynthesizer } from "./utility/deuteriumSynthesizer";
 
 @Component({
   selector: "ogc-root",
@@ -21,15 +24,39 @@ export class AppComponent {
   public plasmaTechnology: number = 0;
 
   // Planet Variables
-  public temperature: number = 0;
+  public temperature: number = 32;
 
   // Metal Mine Variables
-  public metallMineLvl: number = 26;
-  public metallMinePercentage: number = 100;
+  public metalMineLvl: number = 27;
+  public metalMinePercentage: number = 100;
   public metalItem: number = 0;
-  public metallMineProd: number = this.calcMetalMineProd(
-    this.metallMineLvl,
-    this.universeSpeed
+  public metalMineProd: number =
+    MetalMine.production(this.metalMineLvl) * this.universeSpeed;
+  public metalMineEnergyConsumtion: number = MetalMine.energyConsumption(
+    this.metalMineLvl
+  );
+
+  // Crystal Mine Variables
+  public crystalMineLvl: number = 27;
+  public crystalMinePercentage: number = 100;
+  public crystalItem: number = 0;
+  public crystalMineProd: number =
+    CrystalMine.production(this.crystalMineLvl) * this.universeSpeed;
+  public crystalMineEnergyConsumtion: number = CrystalMine.energyConsumption(
+    this.crystalMineLvl
+  );
+
+  // Deuterium Synthesizer Variables
+  public deuteriumSynthesizerLvl: number = 24;
+  public deuteriumSynthesizerPercentage: number = 100;
+  public deuteriumItem: number = 0;
+  public deuteriumSynthesizerProd: number =
+    DeuteriumSynthesizer.production(
+      this.deuteriumSynthesizerLvl,
+      this.temperature
+    ) * this.universeSpeed;
+  public deuteriumSynthesizerEnergyConsumtion: number = DeuteriumSynthesizer.energyConsumption(
+    this.deuteriumSynthesizerLvl
   );
 
   constructor() {}
@@ -55,8 +82,8 @@ export class AppComponent {
       ((Math.floor(
         30 *
           metallMineLvl *
-          Math.pow(1.1, this.metallMineLvl) *
-          (this.metallMinePercentage / 100) *
+          Math.pow(1.1, this.metalMineLvl) *
+          (this.metalMinePercentage / 100) *
           (this.geologistFactorAll / 100) *
           (this.metalItem / 100) +
           this.baseIncomeMetal

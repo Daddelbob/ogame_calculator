@@ -1,5 +1,5 @@
-<div>Universumsgeschwindigkeit: 7</div>
-<div>Temperatur: 0</div>
+<div>Universumsgeschwindigkeit: {{ universeSpeed }}</div>
+<div>Temperatur: {{ temperature }}</div>
 <table>
   <tr>
     <th>Bezeichnung</th>
@@ -15,41 +15,41 @@
     <td>Grundeinkommen</td>
     <td></td>
     <td></td>
-    <td>210</td>
-    <td>105</td>
+    <td>{{ baseIncomeMetal * universeSpeed }}</td>
+    <td>{{ baseIncomeCrystal * universeSpeed }}</td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td>Metallmine</td>
-    <td>33</td>
+    <td>{{ metalMineLvl }}</td>
     <td></td>
-    <td>21000</td>
+    <td>{{ metalMineProd }}</td>
     <td></td>
     <td></td>
-    <td>-5000</td>
-    <td>100</td>
+    <td>{{ metalMineEnergyConsumtion }}</td>
+    <td>{{ metalMinePercentage }}</td>
   </tr>
   <tr>
     <td>Kristallmine</td>
-    <td>30</td>
+    <td>{{ crystalMineLvl }}</td>
     <td></td>
     <td></td>
-    <td>10005</td>
+    <td>{{ crystalMineProd }}</td>
     <td></td>
-    <td>-2500</td>
-    <td>100</td>
+    <td>{{ crystalMineEnergyConsumtion }}</td>
+    <td>{{ crystalMinePercentage }}</td>
   </tr>
   <tr>
     <td>Deuterium-Synthetisierer</td>
-    <td>29</td>
+    <td>{{ deuteriumSynthesizerLvl }}</td>
     <td></td>
     <td></td>
     <td></td>
-    <td>9999</td>
-    <td>-6666</td>
-    <td>100</td>
+    <td>{{ deuteriumSynthesizerProd }}</td>
+    <td>{{ deuteriumSynthesizerEnergyConsumtion }}</td>
+    <td>{{ deuteriumSynthesizerPercentage }}</td>
   </tr>
   <tr>
     <td>Solarkraftwerk</td>
