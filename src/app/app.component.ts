@@ -8,6 +8,7 @@ import { SolarSatellite } from "./utility/solarSatellite";
 import { Crawler } from "./utility/crawler";
 import { Officers } from "./utility/officers";
 import { ResourceDepot } from "./utility/resourceDepot";
+import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "ogc-root",
@@ -27,8 +28,8 @@ export class AppComponent implements OnInit, OnChanges {
   public hasEngineer: boolean = false;
   public engineerFactorEnergy: number = 10;
   public hasCommando: boolean = false;
-  public plasmaTechnology: number = 10;
-  public energyTechnology: number = 9;
+  public plasmaTechnologyLvl: number = 10;
+  public energyTechnologyLvl: number = 9;
   public arraySize25: number[] = Array.from(
     new Array(25),
     (val, index) => index
@@ -90,7 +91,7 @@ export class AppComponent implements OnInit, OnChanges {
   public fusionReactorLvl: number = 1;
   public fusionReactorPercentage: number = 100;
   public fusionReactorEnergyProd: number =
-    FusionReactor.production(this.fusionReactorLvl, this.energyTechnology) *
+    FusionReactor.production(this.fusionReactorLvl, this.energyTechnologyLvl) *
     (this.fusionReactorPercentage / 100);
   public fusionReactorDeuteriumConsumtion: number =
     FusionReactor.deuteriumConsumption(this.fusionReactorLvl) *
@@ -98,45 +99,47 @@ export class AppComponent implements OnInit, OnChanges {
     this.universeSpeed;
 
   // Solar Satellites Variables
-  public solarSatellites: number = 180;
+  public solarSatellitesAmount: number = 180;
   public solarSatellitesPercentage: number = 100;
   public solarSatellitesEnergyProd: number =
     SolarSatellite.production(this.temperature) *
-    this.solarSatellites *
+    this.solarSatellitesAmount *
     (this.solarSatellitesPercentage / 100);
 
   // Crawler Variables
-  public crawlers: number = 80;
+  public crawlersAmount: number = 80;
   public crawlersPercentage: number = 100;
   public crawlersMetalProd: number =
     Math.floor(this.metalMineProd * Crawler.metalProdFactor) *
     (this.isCollector ? 1 + Officers.collectorCrawlerProdFactor : 1) *
-    this.crawlers *
+    this.crawlersAmount *
     (this.crawlersPercentage / 100);
   public crawlersCrystalProd: number =
     Math.floor(
-      this.crystalMineProd * Crawler.crystalProdFactor * this.crawlers
+      this.crystalMineProd * Crawler.crystalProdFactor * this.crawlersAmount
     ) *
     (this.crawlersPercentage / 100);
   public crawlersDeuteriumProd: number =
     Math.floor(
       this.deuteriumSynthesizerProd *
         Crawler.deuteriumProdFactor *
-        this.crawlers
+        this.crawlersAmount
     ) *
     (this.crawlersPercentage / 100);
   public crawlersEnergyConsumtion: number =
-    this.crawlers * Crawler.energyConsumtion * (this.crawlersPercentage / 100);
+    this.crawlersAmount *
+    Crawler.energyConsumtion *
+    (this.crawlersPercentage / 100);
 
   //Plasma Technology Variables
   public plasmaTechnologyMetalProd: number = Math.floor(
-    this.metalMineProd * this.plasmaTechnology * 0.01
+    this.metalMineProd * this.plasmaTechnologyLvl * 0.01
   );
   public plasmaTechnologyCrystalProd: number = Math.floor(
-    this.crystalMineProd * this.plasmaTechnology * 0.0066
+    this.crystalMineProd * this.plasmaTechnologyLvl * 0.0066
   );
   public plasmaTechnologyDeuteriumProd: number = Math.floor(
-    this.deuteriumSynthesizerProd * this.plasmaTechnology * 0.0033
+    this.deuteriumSynthesizerProd * this.plasmaTechnologyLvl * 0.0033
   );
 
   // Items Variables
@@ -218,7 +221,39 @@ export class AppComponent implements OnInit, OnChanges {
   public totalDeuteriumProd: number = 0;
   public totalEnergyProd: number = 0;
 
-  constructor() {}
+  // Resources Form to interact with
+  public resourceForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+    this.reloadForm();
+
+    this.resourceForm.valueChanges.subscribe(changes => {
+      console.log(changes);
+      this.calculateStats();
+    });
+  }
+
+  reloadForm() {
+    this.resourceForm = this.formBuilder.group({
+      metalMineLvlControl: 0,
+      crystalMineLvlControl: 0,
+      deuteriumSynthesizerLvlControl: 0,
+      solarPlantLvlControl: 0,
+      fusionReactorLvlControl: 0,
+      solarSatellitesAmountControl: 0,
+      crawlersAmountControl: 0,
+      plasmaTechnologyLvlControl: 0,
+      // items
+      selectedItemMetalControl: 0,
+      selectedItemCrystalControl: 0,
+      selectedItemDeuteriumControl: 0,
+      // bonuses
+      hasGeologistControl: false,
+      hasEngineerControl: false,
+      hasCommandoControl: false,
+      isCollectorControl: false
+    });
+  }
 
   ngOnInit() {
     console.log("init");
@@ -226,7 +261,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("change");
+    console.log("change", changes);
     // this.calculateStats();
   }
 
@@ -320,7 +355,7 @@ export class AppComponent implements OnInit, OnChanges {
           (this.metalItem / 100) +
           this.baseIncomeMetal
       ) *
-        (100 + 1 * this.plasmaTechnology)) /
+        (100 + 1 * this.plasmaTechnologyLvl)) /
         100) *
       this.universeSpeed
     );
@@ -350,20 +385,20 @@ export class AppComponent implements OnInit, OnChanges {
     console.log(arr);
     console.log(removed);
     for (let i = 1; i < arr.length / 3; i++) {
-      arr.splice(i * 3 + i - 1, 0, '.');
+      arr.splice(i * 3 + i - 1, 0, ".");
     }
     arr.pop();
     console.log(arr);
   }
 
-//   var arr = "1".split("");
-// arr.reverse();
-// var toPop = arr.length % 3;
-// var removed;
-// if(toPop > 0 && arr.length>3) {removed = arr.slice(arr.length-toPop,arr.length);}
-// console.log(arr);
-// console.log(removed);
-// for(var i=1; i<arr.length / 3; i++) {arr.splice(i*3+i-1, 0, ".");}
-// arr.pop();
-// console.log(arr);
+  //   var arr = "1".split("");
+  // arr.reverse();
+  // var toPop = arr.length % 3;
+  // var removed;
+  // if(toPop > 0 && arr.length>3) {removed = arr.slice(arr.length-toPop,arr.length);}
+  // console.log(arr);
+  // console.log(removed);
+  // for(var i=1; i<arr.length / 3; i++) {arr.splice(i*3+i-1, 0, ".");}
+  // arr.pop();
+  // console.log(arr);
 }
