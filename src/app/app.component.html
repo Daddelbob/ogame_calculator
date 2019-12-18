@@ -1,2 +1,375 @@
-<p>{{ metallMineProd }}</p>
-<mat-slider></mat-slider>
+<form [formGroup]="resourceForm">
+  <div>
+    Universumsgeschwindigkeit:
+    <input
+      class="short-input"
+      type="number"
+      formControlName="universeSpeedControl"
+    />
+  </div>
+  <div>
+    Temperatur:
+    <input
+      class="short-input"
+      type="number"
+      formControlName="temperatureControl"
+    />
+  </div>
+  <table>
+    <tr>
+      <th>Bezeichnung</th>
+      <th>Level / Anzahl</th>
+      <th>Regulieren</th>
+      <th>Metall</th>
+      <th>Kristall</th>
+      <th>Deuterium</th>
+      <th>Energie</th>
+      <th>Prozent</th>
+    </tr>
+    <tr>
+      <td>Grundeinkommen</td>
+      <td></td>
+      <td></td>
+      <td>{{ baseIncomeMetal() }}</td>
+      <td>{{ baseIncomeCrystal() }}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Metallmine</td>
+      <td>
+        <input
+          class="short-input"
+          type="number"
+          formControlName="metalMineLvlControl"
+        />
+      </td>
+      <td></td>
+      <td>{{ metalMineProd() }}</td>
+      <td></td>
+      <td></td>
+      <td>{{ metalMineEnergyConsumtion() }}</td>
+      <td>
+        <select formControlName="metalMinePercentageControl">
+          <option
+            *ngFor="let item of arraySize11; let i = index"
+            [ngValue]="(arraySize11.length - 1 - i) * 10"
+            >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+          >
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Kristallmine</td>
+      <td>
+        <input
+          class="short-input"
+          type="number"
+          formControlName="crystalMineLvlControl"
+        />
+      </td>
+      <td></td>
+      <td></td>
+      <td>{{ crystalMineProd() }}</td>
+      <td></td>
+      <td>{{ crystalMineEnergyConsumtion() }}</td>
+      <td>
+        <select formControlName="crystalMinePercentageControl">
+          <option
+            *ngFor="let item of arraySize11; let i = index"
+            [ngValue]="(arraySize11.length - 1 - i) * 10"
+            >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+          >
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Deuterium-Synthetisierer</td>
+      <td>
+        <input
+          class="short-input"
+          type="number"
+          formControlName="deuteriumSynthesizerLvlControl"
+        />
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{ deuteriumSynthesizerProd() }}</td>
+      <td>{{ deuteriumSynthesizerEnergyConsumtion() }}</td>
+      <td>
+        <select formControlName="deuteriumSynthesizerPercentageControl">
+          <option
+            *ngFor="let item of arraySize11; let i = index"
+            [ngValue]="(arraySize11.length - 1 - i) * 10"
+            >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+          >
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Solarkraftwerk</td>
+      <td>
+        <input
+          class="short-input"
+          type="number"
+          formControlName="solarPlantLvlControl"
+        />
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{ solarPlantProd() }}</td>
+      <td>
+        <select formControlName="solarPlantPercentageControl">
+          <option
+            *ngFor="let item of arraySize11; let i = index"
+            [ngValue]="(arraySize11.length - 1 - i) * 10"
+            >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+          >
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Fusionskraftwerk</td>
+      <td>
+        <input
+          class="short-input"
+          type="number"
+          formControlName="fusionReactorLvlControl"
+        />
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{ fusionReactorDeuteriumConsumtion() }}</td>
+      <td>{{ fusionReactorEnergyProd() }}</td>
+      <td>
+        <select formControlName="fusionReactorPercentageControl">
+          <option
+            *ngFor="let item of arraySize11; let i = index"
+            [ngValue]="(arraySize11.length - 1 - i) * 10"
+            >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+          >
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Solarsatellit</td>
+      <td>
+        <input
+          class="short-input"
+          type="number"
+          formControlName="solarSatellitesAmountControl"
+        />
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{ solarSatellitesEnergyProd() }}</td>
+      <td>
+        <select formControlName="solarSatellitesPercentageControl">
+          <option
+            *ngFor="let item of arraySize11; let i = index"
+            [ngValue]="(arraySize11.length - 1 - i) * 10"
+            >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+          >
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Crawler</td>
+      <td>
+        <input
+          class="short-input"
+          type="number"
+          formControlName="crawlersAmountControl"
+        />
+      </td>
+      <td></td>
+      <td>{{ crawlersMetalProd() }}</td>
+      <td>{{ crawlersCrystalProd() }}</td>
+      <td>{{ crawlersDeuteriumProd() }}</td>
+      <td>{{ crawlersEnergyConsumtion() }}</td>
+      <td>
+        <select formControlName="crawlersPercentageControl">
+          <option
+            *ngFor="let item of arraySize11; let i = index"
+            [ngValue]="(arraySize11.length - 1 - i) * 10"
+            >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+          >
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Plasmatechnik</td>
+      <td>
+        <input
+          class="short-input"
+          type="number"
+          formControlName="plasmaTechnologyLvlControl"
+        />
+      </td>
+      <td></td>
+      <td>{{ plasmaTechnologyMetalProd() }}</td>
+      <td>{{ plasmaTechnologyCrystalProd() }}</td>
+      <td>{{ plasmaTechnologyDeuteriumProd() }}</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Items</td>
+      <td></td>
+      <td></td>
+      <td>
+        {{ itemMetalProd() }}
+        <select type="number" formControlName="selectedItemMetalControl"
+          ><option [ngValue]="0" selected="selected">0%</option>
+          <option [ngValue]="10">10%</option>
+          <option [ngValue]="20">20%</option>
+          <option [ngValue]="30">30%</option></select
+        >
+      </td>
+      <td>
+        {{ itemCrystalProd() }}
+        <select type="number" formControlName="selectedItemCrystalControl"
+          ><option [ngValue]="0" selected="selected">0%</option>
+          <option [ngValue]="10">10%</option>
+          <option [ngValue]="20">20%</option>
+          <option [ngValue]="30">30%</option></select
+        >
+      </td>
+      <td>
+        {{ itemDeuteroiumProd() }}
+        <select type="number" formControlName="selectedItemDeuteriumControl"
+          ><option [ngValue]="0" selected="selected">0%</option>
+          <option [ngValue]="10">10%</option>
+          <option [ngValue]="20">20%</option>
+          <option [ngValue]="30">30%</option></select
+        >
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Geologe</td>
+      <td>
+        <mat-slide-toggle
+          formControlName="hasGeologistControl"
+        ></mat-slide-toggle>
+      </td>
+      <td></td>
+      <td>{{ hasGeologist ? geologistMetalProd() : "" }}</td>
+      <td>{{ hasGeologist ? geologistCrystalProd() : "" }}</td>
+      <td>{{ hasGeologist ? geologistDeuteroiumProd() : "" }}</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Ingenieur</td>
+      <td>
+        <mat-slide-toggle
+          formControlName="hasEngineerControl"
+        ></mat-slide-toggle>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{ hasEngineer ? engineerEnergyProd() : "" }}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Kommandostab</td>
+      <td>
+        <mat-slide-toggle
+          formControlName="hasCommandoControl"
+        ></mat-slide-toggle>
+      </td>
+      <td></td>
+      <td>{{ hasCommando ? commandoMetalProd() : "" }}</td>
+      <td>{{ hasCommando ? commandoCrystalProd() : "" }}</td>
+      <td>{{ hasCommando ? commandoDeuteroiumProd() : "" }}</td>
+      <td>{{ hasCommando ? commandoEnergyProd() : "" }}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Kollektor</td>
+      <td>
+        <mat-slide-toggle
+          formControlName="isCollectorControl"
+        ></mat-slide-toggle>
+      </td>
+      <td></td>
+      <td>{{ isCollector ? collectorMetalProd() : "" }}</td>
+      <td>{{ isCollector ? collectorCrystalProd() : "" }}</td>
+      <td>{{ isCollector ? collectorDeuteroiumProd() : "" }}</td>
+      <td>{{ isCollector ? collectorEnergyProd() : "" }}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Lagerkapazität</td>
+      <td></td>
+      <td></td>
+      <td>
+        {{ metalDepotCapacity() }}
+        <input
+          class="short-input"
+          type="number"
+          formControlName="metalDepotLvlControl"
+        />
+      </td>
+      <td>
+        {{ crstalDepotCapacity() }}
+        <input
+          class="short-input"
+          type="number"
+          formControlName="crystalDepotLvlControl"
+        />
+      </td>
+      <td>
+        {{ deuteriumDepotCapacity() }}
+        <input
+          class="short-input"
+          type="number"
+          formControlName="deuteriumDepotLvlControl"
+        />
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Gesamt pro Stunde</td>
+      <td></td>
+      <td></td>
+      <td>{{ totalMetalProd() }}</td>
+      <td>{{ totalCrystalProd() }}</td>
+      <td>{{ totalDeuteriumProd() }}</td>
+      <td>{{ totalEnergyProd() }}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Gesamt pro Tag</td>
+      <td></td>
+      <td></td>
+      <td>{{ totalMetalProd() * 24 }}</td>
+      <td>{{ totalCrystalProd() * 24 }}</td>
+      <td>{{ totalDeuteriumProd() * 24 }}</td>
+      <td>{{ totalEnergyProd() }}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Gesamt pro Woche</td>
+      <td></td>
+      <td></td>
+      <td>{{ totalMetalProd() * 24 * 7 }}</td>
+      <td>{{ totalCrystalProd() * 24 * 7 }}</td>
+      <td>{{ totalDeuteriumProd() * 24 * 7 }}</td>
+      <td>{{ totalEnergyProd() }}</td>
+      <td></td>
+    </tr>
+  </table>
+</form>

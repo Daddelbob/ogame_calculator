@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomMaterialModule } from './custom-material/custom-material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CustomMaterialModule } from './custom-material/custom-material.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CustomMaterialModule
+    FormsModule, ReactiveFormsModule,
+    CustomMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
