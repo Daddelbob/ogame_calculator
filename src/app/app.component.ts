@@ -235,6 +235,8 @@ export class AppComponent implements OnInit, OnChanges {
 
   reloadForm() {
     this.resourceForm = this.formBuilder.group({
+      universeSpeedControl: 1,
+      temperatureControl: 0,
       metalMineLvlControl: 0,
       metalMinePercentageControl: 100,
       crystalMineLvlControl: 0,
