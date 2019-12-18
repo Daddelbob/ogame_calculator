@@ -19,7 +19,6 @@ export class AppComponent implements OnInit, OnChanges {
   title = "oGameCalculator";
 
   // Global Account Variables
-  public universeSpeed: number = 7;
   public baseIncomeMetal: number = 30;
   public baseIncomeCrystal: number = 15;
   public isCollector: boolean = true;
@@ -36,7 +35,6 @@ export class AppComponent implements OnInit, OnChanges {
   );
 
   // Planet Variables
-  public temperature: number = 32;
   public selectedItemMetal: number = 0;
   public selectedItemCrystal: number = 0;
   public selectedItemDeuterium: number = 0;
@@ -237,12 +235,14 @@ export class AppComponent implements OnInit, OnChanges {
     this.resourceForm = this.formBuilder.group({
       universeSpeedControl: 1,
       temperatureControl: 0,
+      // Bulidings etc.
       metalMineLvlControl: 0,
       metalMinePercentageControl: 100,
       crystalMineLvlControl: 0,
       crystalMinePercentageControl: 100,
       deuteriumSynthesizerLvlControl: 0,
       deuteriumSynthesizerPercentageControl: 100,
+
       solarPlantLvlControl: 0,
       solarPlantPercentageControl: 100,
       fusionReactorLvlControl: 0,
@@ -252,6 +252,7 @@ export class AppComponent implements OnInit, OnChanges {
       crawlersAmountControl: 0,
       crawlersPercentageControl: 100,
       plasmaTechnologyLvlControl: 0,
+      energyTechnologyLvlControl: 0,
       // items
       selectedItemMetalControl: 0,
       selectedItemCrystalControl: 0,
@@ -264,8 +265,120 @@ export class AppComponent implements OnInit, OnChanges {
       // resource depots
       metalDepotLvlControl: 0,
       crystalDepotLvlControl: 0,
-      deuteriumDepotLvlControl: 0,
+      deuteriumDepotLvlControl: 0
     });
+  }
+
+  get universeSpeed() {
+    return this.resourceForm.get("universeSpeedControl").value;
+  }
+
+  get temperature() {
+    return this.resourceForm.get("temperatureControl").value;
+  }
+
+  get metalMineLvlControl() {
+    return this.resourceForm.get("metalMineLvlControl").value;
+  }
+
+  get metalMinePercentageControl() {
+    return this.resourceForm.get("metalMinePercentageControl").value;
+  }
+
+  get crystalMineLvlControl() {
+    return this.resourceForm.get("crystalMineLvlControl").value;
+  }
+
+  get crystalMinePercentageControl() {
+    return this.resourceForm.get("crystalMinePercentageControl").value;
+  }
+
+  get deuteriumSynthesizerLvlControl() {
+    return this.resourceForm.get("deuteriumSynthesizerLvlControl").value;
+  }
+
+  get deuteriumSynthesizerPercentageControl() {
+    return this.resourceForm.get("deuteriumSynthesizerPercentageControl").value;
+  }
+
+  get solarPlantLvlControl() {
+    return this.resourceForm.get("solarPlantLvlControl").value;
+  }
+
+  get solarPlantPercentageControl() {
+    return this.resourceForm.get("solarPlantPercentageControl").value;
+  }
+
+  get fusionReactorLvlControl() {
+    return this.resourceForm.get("fusionReactorLvlControl").value;
+  }
+
+  get fusionReactorPercentageControl() {
+    return this.resourceForm.get("fusionReactorPercentageControl").value;
+  }
+
+  get solarSatellitesAmountControl() {
+    return this.resourceForm.get("solarSatellitesAmountControl").value;
+  }
+
+  get solarSatellitesPercentageControl() {
+    return this.resourceForm.get("solarSatellitesPercentageControl").value;
+  }
+
+  get crawlersAmountControl() {
+    return this.resourceForm.get("crawlersAmountControl").value;
+  }
+
+  get crawlersPercentageControl() {
+    return this.resourceForm.get("crawlersPercentageControl").value;
+  }
+
+  get plasmaTechnologyLvlControl() {
+    return this.resourceForm.get("plasmaTechnologyLvlControl").value;
+  }
+
+  get energyTechnologyLvlControl() {
+    return this.resourceForm.get("energyTechnologyLvlControl").value;
+  }
+
+  get selectedItemMetalControl() {
+    return this.resourceForm.get("selectedItemMetalControl").value;
+  }
+
+  get selectedItemCrystalControl() {
+    return this.resourceForm.get("selectedItemCrystalControl").value;
+  }
+
+  get selectedItemDeuteriumControl() {
+    return this.resourceForm.get("selectedItemDeuteriumControl").value;
+  }
+
+  get hasGeologistControl() {
+    return this.resourceForm.get("hasGeologistControl").value;
+  }
+
+  get hasEngineerControl() {
+    return this.resourceForm.get("hasEngineerControl").value;
+  }
+
+  get hasCommandoControl() {
+    return this.resourceForm.get("hasCommandoControl").value;
+  }
+
+  get isCollectorControl() {
+    return this.resourceForm.get("isCollectorControl").value;
+  }
+
+  get metalDepotLvlControl() {
+    return this.resourceForm.get("metalDepotLvlControl").value;
+  }
+
+  get crystalDepotLvlControl() {
+    return this.resourceForm.get("crystalDepotLvlControl").value;
+  }
+
+  get deuteriumDepotLvlControl() {
+    return this.resourceForm.get("deuteriumDepotLvlControl").value;
   }
 
   ngOnInit() {
