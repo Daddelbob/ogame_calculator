@@ -19,10 +19,10 @@ export class AppComponent implements OnInit, OnChanges {
   title = "oGameCalculator";
 
   // Global Account Variables
-  public baseIncomeMetal: number = 30;
-  public baseIncomeCrystal: number = 15;
-  public geologistFactorAll: number = 10;
-  public engineerFactorEnergy: number = 10;
+  private baseIncomeMetalConst: number = 30;
+  private baseIncomeCrystalConst: number = 15;
+  private geologistFactorAll: number = 10;
+  private engineerFactorEnergy: number = 10;
   public arraySize11: number[] = Array.from(
     new Array(11),
     (val, index) => index
@@ -198,6 +198,14 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   ////////////////////////////////////////////////////////
+
+  public baseIncomeMetal(): number {
+    return this.baseIncomeMetalConst * this.universeSpeed;
+  }
+
+  public baseIncomeCrystal(): number {
+    return this.baseIncomeCrystalConst * this.universeSpeed;
+  }
 
   // Metal Mine Variables
   public metalMineProd(): number {
@@ -433,7 +441,7 @@ export class AppComponent implements OnInit, OnChanges {
   // Total Resources
   public totalMetalProd(): number {
     return Math.floor(
-      this.baseIncomeMetal +
+      this.baseIncomeMetal() +
         this.metalMineProd() +
         this.crawlersMetalProd() +
         this.plasmaTechnologyMetalProd() +
@@ -445,7 +453,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
   public totalCrystalProd(): number {
     return Math.floor(
-      this.baseIncomeCrystal +
+      this.baseIncomeCrystal() +
         this.crystalMineProd() +
         this.crawlersCrystalProd() +
         this.plasmaTechnologyCrystalProd() +
