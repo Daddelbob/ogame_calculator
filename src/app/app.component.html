@@ -33,7 +33,15 @@
         <td></td>
         <td></td>
         <td>{{ metalMineEnergyConsumtion }}</td>
-        <td>{{ metalMinePercentage }}</td>
+        <td>
+          <select formControlName="metalMinePercentageControl">
+            <option
+              *ngFor="let item of arraySize11; let i = index"
+              [ngValue]="(arraySize11.length - 1 - i) * 10"
+              >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+            >
+          </select>
+        </td>
       </tr>
       <tr>
         <td>Kristallmine</td>
@@ -43,7 +51,15 @@
         <td>{{ crystalMineProd }}</td>
         <td></td>
         <td>{{ crystalMineEnergyConsumtion }}</td>
-        <td>{{ crystalMinePercentage }}</td>
+        <td>
+          <select formControlName="crystalMinePercentageControl">
+            <option
+              *ngFor="let item of arraySize11; let i = index"
+              [ngValue]="(arraySize11.length - 1 - i) * 10"
+              >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+            >
+          </select>
+        </td>
       </tr>
       <tr>
         <td>Deuterium-Synthetisierer</td>
@@ -53,7 +69,15 @@
         <td></td>
         <td>{{ deuteriumSynthesizerProd }}</td>
         <td>{{ deuteriumSynthesizerEnergyConsumtion }}</td>
-        <td>{{ deuteriumSynthesizerPercentage }}</td>
+        <td>
+          <select formControlName="deuteriumSynthesizerPercentageControl">
+            <option
+              *ngFor="let item of arraySize11; let i = index"
+              [ngValue]="(arraySize11.length - 1 - i) * 10"
+              >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+            >
+          </select>
+        </td>
       </tr>
       <tr>
         <td>Solarkraftwerk</td>
@@ -63,7 +87,15 @@
         <td></td>
         <td></td>
         <td>{{ solarPlantProd }}</td>
-        <td>{{ solarPlantPercentage }}</td>
+        <td>
+          <select formControlName="solarPlantPercentageControl">
+            <option
+              *ngFor="let item of arraySize11; let i = index"
+              [ngValue]="(arraySize11.length - 1 - i) * 10"
+              >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+            >
+          </select>
+        </td>
       </tr>
       <tr>
         <td>Fusionskraftwerk</td>
@@ -75,7 +107,15 @@
         <td></td>
         <td>{{ fusionReactorDeuteriumConsumtion }}</td>
         <td>{{ fusionReactorEnergyProd }}</td>
-        <td>100</td>
+        <td>
+          <select formControlName="fusionReactorPercentageControl">
+            <option
+              *ngFor="let item of arraySize11; let i = index"
+              [ngValue]="(arraySize11.length - 1 - i) * 10"
+              >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+            >
+          </select>
+        </td>
       </tr>
       <tr>
         <td>Solarsatellit</td>
@@ -87,7 +127,15 @@
         <td></td>
         <td></td>
         <td>{{ solarSatellitesEnergyProd }}</td>
-        <td>{{ solarSatellitesPercentage }}</td>
+        <td>
+          <select formControlName="solarSatellitesPercentageControl">
+            <option
+              *ngFor="let item of arraySize11; let i = index"
+              [ngValue]="(arraySize11.length - 1 - i) * 10"
+              >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+            >
+          </select>
+        </td>
       </tr>
       <tr>
         <td>Crawler</td>
@@ -99,7 +147,15 @@
         <td>{{ crawlersCrystalProd }}</td>
         <td>{{ crawlersDeuteriumProd }}</td>
         <td>{{ crawlersEnergyConsumtion }}</td>
-        <td>{{ crawlersPercentage }}</td>
+        <td>
+          <select formControlName="crawlersPercentageControl">
+            <option
+              *ngFor="let item of arraySize11; let i = index"
+              [ngValue]="(arraySize11.length - 1 - i) * 10"
+              >{{ (arraySize11.length - 1 - i) * 10 }}%</option
+            >
+          </select>
+        </td>
       </tr>
       <tr>
         <td>Plasmatechnik</td>
@@ -209,33 +265,15 @@
         <td></td>
         <td>
           {{ metalDepotCapacity }}
-          <select>
-            <option
-              *ngFor="let item of arraySize25; let i = index"
-              [ngValue]="i"
-              >{{ i }}</option
-            >
-          </select>
+          <input type="number" formControlName="metalDepotLvlControl" />
         </td>
         <td>
           {{ crstalDepotCapacity }}
-          <select>
-            <option
-              *ngFor="let item of arraySize25; let i = index"
-              [ngValue]="i"
-              >{{ i }}</option
-            >
-          </select>
+          <input type="number" formControlName="crystalDepotLvlControl" />
         </td>
         <td>
           {{ deuteriumDepotCapacity }}
-          <select>
-            <option
-              *ngFor="let item of arraySize25; let i = index"
-              [ngValue]="i"
-              >{{ i }}</option
-            >
-          </select>
+          <input type="number" formControlName="deuteriumDepotLvlControl" />
         </td>
         <td></td>
         <td></td>

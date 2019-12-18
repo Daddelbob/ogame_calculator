@@ -30,8 +30,8 @@ export class AppComponent implements OnInit, OnChanges {
   public hasCommando: boolean = false;
   public plasmaTechnologyLvl: number = 10;
   public energyTechnologyLvl: number = 9;
-  public arraySize25: number[] = Array.from(
-    new Array(25),
+  public arraySize11: number[] = Array.from(
+    new Array(11),
     (val, index) => index
   );
 
@@ -236,12 +236,19 @@ export class AppComponent implements OnInit, OnChanges {
   reloadForm() {
     this.resourceForm = this.formBuilder.group({
       metalMineLvlControl: 0,
+      metalMinePercentageControl: 100,
       crystalMineLvlControl: 0,
+      crystalMinePercentageControl: 100,
       deuteriumSynthesizerLvlControl: 0,
+      deuteriumSynthesizerPercentageControl: 100,
       solarPlantLvlControl: 0,
+      solarPlantPercentageControl: 100,
       fusionReactorLvlControl: 0,
+      fusionReactorPercentageControl: 100,
       solarSatellitesAmountControl: 0,
+      solarSatellitesPercentageControl: 100,
       crawlersAmountControl: 0,
+      crawlersPercentageControl: 100,
       plasmaTechnologyLvlControl: 0,
       // items
       selectedItemMetalControl: 0,
@@ -251,7 +258,11 @@ export class AppComponent implements OnInit, OnChanges {
       hasGeologistControl: false,
       hasEngineerControl: false,
       hasCommandoControl: false,
-      isCollectorControl: false
+      isCollectorControl: false,
+      // resource depots
+      metalDepotLvlControl: 0,
+      crystalDepotLvlControl: 0,
+      deuteriumDepotLvlControl: 0,
     });
   }
 
